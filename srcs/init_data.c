@@ -59,46 +59,6 @@ static int	ft_init_mutex(t_program *data)
 	return (EXIT_SUCCESS);
 }
 
-static void	ft_fill_philos(t_philo *philos, t_program *data)
-{
-	int	i;
-
-	i = 0;
-	while (i < data->nb_philo)
-	{
-		philos[i].nb_philo = data->nb_philo;
-		philos[i].tdeath = data->tdeath;
-		philos[i].teat = data->teat;
-		philos[i].tsleep = data->tsleep;
-		philos[i].nb_eat = data->nb_eat;
-		philos[i].l_fork = NULL;
-		philos[i].r_fork = NULL;
-		philos[i].write_lock = &data->write_lock;
-		philos[i].dead_lock = &data->dead_lock;
-		philos[i].meal_lock = &data->meal_lock;
-		philos[i].tid = 0;
-		philos[i].id = 1 + i;
-		philos[i].eating = 0;
-		philos[i].meals_eaten = 0;
-		philos[i].start_time = 0;
-		philos[i].dead = &data->dead_flag;
-		++i;
-	}
-}
-
-static t_philo	*ft_init_philos(t_program *data)
-{
-	t_philo	*philos;
-	int		i;
-
-	i = 0;
-	philos = malloc(sizeof(t_philo) * (data->nb_philo));
-	if (!philos)
-		return (NULL);
-	ft_fill_philos(philos, data);
-	return (philos);
-}
-
 int	ft_init_data(t_program *data, char **argv)
 {
 	if (ft_init_args(data, argv) == EXIT_FAILURE)

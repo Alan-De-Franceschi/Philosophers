@@ -55,6 +55,7 @@ typedef struct s_program
 }	t_program;
 
 int		ft_init_data(t_program *data, char **argv);
+t_philo	*ft_init_philos(t_program *data);
 int		ft_abs(int n);
 int		ft_atoi(const char *nptr, int *error);
 int		ft_putstr_fd(char *s, int fd);

@@ -29,6 +29,6 @@ int	main(int argc, char **argv)
 		return (EXIT_FAILURE);
 	if (ft_init_data(&data, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	//ft_philo(&data);
+	ft_philo(&data);
 	return (EXIT_SUCCESS);
 }

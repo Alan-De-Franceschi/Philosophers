@@ -32,6 +32,7 @@ SOURCES_PATH	=	srcs/
 
 SOURCES_MAIN	= 	main.c \
 						init_data.c \
+						init_philos.c \
 						utils.c \
 						errors.c \
 						philo.c \
