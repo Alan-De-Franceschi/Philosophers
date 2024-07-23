@@ -28,7 +28,7 @@ COLOUR_END		=	\033[0m
 #                                                                              #
 # **************************************************************************** #
 
-SOURCES_PATH	=	srcs/
+SOURCES_PATH	=	src/
 
 SOURCES_MAIN	= 	main.c \
 
@@ -65,7 +65,7 @@ OBJECTS			=	$(addprefix ${OBJECTS_PATH}, ${SOURCES_MAIN:.c=.o}) \
 #                                                                              #
 # **************************************************************************** #
 
-INCLD_DIR		=	./includes/
+INCLD_DIR		=	./inc/
 
 INCLD			=	${INCLD_DIR}philo.h
 
