@@ -18,6 +18,6 @@ int	ft_init_start_time(t_philo *philo)
 
 	if (gettimeofday(&tv, NULL) == -1)
 		return (EXIT_FAILURE);
-	philo->start_time = tv.tv_sec;
+	philo->start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (EXIT_SUCCESS);
 }

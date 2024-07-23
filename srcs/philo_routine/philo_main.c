@@ -17,9 +17,7 @@ static void	*ft_thread_routine(void *data)
 	t_philo		*philo;
 
 	philo = (t_philo *)data;
-	if (philo->start_time == 0)
-		ft_init_start_time(philo);
-	printf("je suis le philosophe = %d, mon tid est : [%ld], je commence a : [%ld] sec\n", philo->id, philo->tid, philo->start_time);
+	printf("je suis le philosophe = %d, mon tid est : [%ld], je commence a : %ld ms\n", philo->id, philo->tid, philo->start_time);
 	return (NULL);
 }
 
@@ -30,8 +28,8 @@ int	ft_philo(t_program *data)
 	i = 0;
 	while (i < data->nb_philo)
 	{
-
 		pthread_create(&data->philos[i].tid, NULL, ft_thread_routine, &data->philos[i]);
+		ft_init_start_time(&data->philos[i]);
 		i++;
 	}
 	i = 0;

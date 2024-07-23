@@ -38,8 +38,8 @@ typedef struct s_philo
 	int				id;
 	int				eating;
 	int				meals_eaten;
-	size_t			start_time;
-	size_t			eat_time;
+	long int		start_time;
+	long int		eat_time;
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
