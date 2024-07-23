@@ -30,7 +30,6 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 	while (i < data->nb_philo)
 	{
 		ft_assign_forks(data, &philos[i], data->nb_philo, i);
-		philos[i].nb_philo = data->nb_philo;
 		philos[i].tdeath = data->tdeath;
 		philos[i].teat = data->teat;
 		philos[i].tsleep = data->tsleep;
@@ -43,6 +42,7 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].eating = 0;
 		philos[i].meals_eaten = 0;
 		philos[i].start_time = 0;
+		philos[i].eat_time = 0;
 		philos[i].dead = &data->dead_flag;
 		++i;
 	}

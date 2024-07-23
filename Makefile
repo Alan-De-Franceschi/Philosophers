@@ -31,11 +31,17 @@ COLOUR_END		=	\033[0m
 SOURCES_PATH	=	srcs/
 
 SOURCES_MAIN	= 	main.c \
-						init_data.c \
-						init_philos.c \
-						utils.c \
-						errors.c \
-						philo.c \
+
+SOURCES_INIT 	=	init/init_data.c \
+					init/init_philos.c \
+
+SOURCES_PHILO	=	philo_routine/philo_main.c \
+
+SOURCES_TIME	=	time_func/start_time.c \
+
+SOURCES_ERRORS	=	errors/errors.c \
+
+SOURCES_UTILS	=	utils/utils.c	\
 
 
 # **************************************************************************** #
@@ -47,6 +53,11 @@ SOURCES_MAIN	= 	main.c \
 OBJECTS_PATH	=	objs/
 
 OBJECTS			=	$(addprefix ${OBJECTS_PATH}, ${SOURCES_MAIN:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_INIT:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_PHILO:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_TIME:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_ERRORS:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_UTILS:.c=.o}) \
 
 # **************************************************************************** #
 #                                                                              #

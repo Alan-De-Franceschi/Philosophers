@@ -13,15 +13,23 @@
 #ifndef PHILO_H
 # define PHILO_H
 
+/****************************************************************************/
+/*                              Includes                                    */
+/****************************************************************************/
+
 # include <stdlib.h>
 # include <unistd.h>
 # include <stdio.h>
 # include <limits.h>
 # include <pthread.h>
+# include <sys/time.h>
+
+/****************************************************************************/
+/*                              Structures                                  */
+/****************************************************************************/
 
 typedef struct s_philo
 {
-	int				nb_philo;
 	int				tdeath;
 	int				teat;
 	int				tsleep;
@@ -31,6 +39,7 @@ typedef struct s_philo
 	int				eating;
 	int				meals_eaten;
 	size_t			start_time;
+	size_t			eat_time;
 	int				*dead;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
@@ -54,12 +63,28 @@ typedef struct s_program
 	t_philo			*philos;
 }	t_program;
 
+/****************************************************************************/
+/*                             Init functions                               */
+/****************************************************************************/
+
 int		ft_init_data(t_program *data, char **argv);
 t_philo	*ft_init_philos(t_program *data);
-int		ft_abs(int n);
-int		ft_atoi(const char *nptr, int *error);
-int		ft_putstr_fd(char *s, int fd);
+
+/****************************************************************************/
+/*                            Philo routine                                 */
+/****************************************************************************/
+
 int		ft_philo(t_program *data);
+
+/****************************************************************************/
+/*                            Time functions                                */
+/****************************************************************************/
+
+int		ft_init_start_time(t_philo *philo);
+
+/****************************************************************************/
+/*                            Error management                              */
+/****************************************************************************/
 
 enum	e_errors
 {
@@ -69,5 +94,13 @@ enum	e_errors
 
 int		ft_args_err(int err);
 int		ft_format_err(int index, char **argv);
+
+/****************************************************************************/
+/*                                Utils                                     */
+/****************************************************************************/
+
+int		ft_abs(int n);
+int		ft_atoi(const char *nptr, int *error);
+int		ft_putstr_fd(char *s, int fd);
 
 #endif
