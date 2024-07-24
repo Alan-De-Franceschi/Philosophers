@@ -21,16 +21,36 @@ static void	*ft_thread_routine(void *data)
 	i = 0;
 	while (philo->meals_eaten < philo->nb_eat)
 	{
-		pthread_mutex_lock(philo->l_fork);
-		printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_lock(philo->r_fork);
-		printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
+		if (philo->id % 2 == 0)
+		{
+			pthread_mutex_lock(philo->l_fork);
+			pthread_mutex_lock(philo->write_lock);
+			printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
+			pthread_mutex_unlock(philo->write_lock);
+			pthread_mutex_lock(philo->r_fork);
+			pthread_mutex_lock(philo->write_lock);
+			printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
+			printf("%ld %d is eating\n", ft_get_time(), philo->id);
+			pthread_mutex_unlock(philo->write_lock);
+		}
+		else
+		{
+			pthread_mutex_lock(philo->r_fork);
+			pthread_mutex_lock(philo->write_lock);
+			printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
+			pthread_mutex_unlock(philo->write_lock);
+			pthread_mutex_lock(philo->l_fork);
+			pthread_mutex_lock(philo->write_lock);
+			printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
+			printf("%ld %d is eating\n", ft_get_time(), philo->id);
+			pthread_mutex_unlock(philo->write_lock);
+		}
 		pthread_mutex_lock(philo->meal_lock);
-		printf("%ld %d is eating\n", ft_get_time(), philo->id);
 		++philo->meals_eaten;
 		pthread_mutex_unlock(philo->meal_lock);
+		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
+		
 	}
 	return (NULL);
 }
