@@ -15,28 +15,49 @@
 static void	*ft_thread_routine(void *data)
 {
 	t_philo		*philo;
+	int			i;
 
 	philo = (t_philo *)data;
-	printf("je suis le philosophe = %d, mon tid est : [%ld], je commence a : %ld ms\n", philo->id, philo->tid, philo->start_time);
+	i = 0;
+	while (philo->meals_eaten < philo->nb_eat)
+	{
+		pthread_mutex_lock(philo->l_fork);
+		printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
+		pthread_mutex_unlock(philo->l_fork);
+		pthread_mutex_lock(philo->r_fork);
+		printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
+		pthread_mutex_lock(philo->meal_lock);
+		printf("%ld %d is eating\n", ft_get_time(), philo->id);
+		++philo->meals_eaten;
+		pthread_mutex_unlock(philo->meal_lock);
+		pthread_mutex_unlock(philo->r_fork);
+	}
 	return (NULL);
 }
 
 int	ft_philo(t_program *data)
 {
 	int 		i;
+	int			j;
 
 	i = 0;
+	j = 0;
 	while (i < data->nb_philo)
 	{
 		pthread_create(&data->philos[i].tid, NULL, ft_thread_routine, &data->philos[i]);
-		ft_init_start_time(&data->philos[i]);
-		i++;
+		if (ft_init_start_time(&data->philos[i]) == EXIT_FAILURE)
+		{
+			pthread_mutex_lock(&data->exit_lock);
+			data->exit_flag = 1;
+			pthread_mutex_unlock(&data->exit_lock);
+			break;
+		}
+		++i;
 	}
-	i = 0;
-	while (i < data->nb_philo)
+	while (j <= i && j < data->nb_philo)
 	{
-		pthread_join(data->philos[i].tid, NULL);
-		i++;
+		pthread_join(data->philos[j].tid, NULL);
+		++j;
 	}
 	return (EXIT_SUCCESS);
 }

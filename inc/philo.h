@@ -30,22 +30,24 @@
 
 typedef struct s_philo
 {
+	pthread_t		tid;
+	int				id;	
 	int				tdeath;
 	int				teat;
 	int				tsleep;
 	int				nb_eat;
-	pthread_t		tid;
-	int				id;
 	int				eating;
 	int				meals_eaten;
 	long int		start_time;
 	long int		eat_time;
 	int				*dead;
+	int				*exit;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
+	pthread_mutex_t	*exit_lock;
 }	t_philo;
 
 typedef struct s_program
@@ -56,10 +58,12 @@ typedef struct s_program
 	int				tsleep;
 	int				nb_eat;
 	int				dead_flag;
+	int				exit_flag;
 	pthread_mutex_t *fork_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t	exit_lock;
 	t_philo			*philos;
 }	t_program;
 
@@ -67,20 +71,21 @@ typedef struct s_program
 /*                             Init functions                               */
 /****************************************************************************/
 
-int		ft_init_data(t_program *data, char **argv);
-t_philo	*ft_init_philos(t_program *data);
+int			ft_init_data(t_program *data, char **argv);
+t_philo		*ft_init_philos(t_program *data);
 
 /****************************************************************************/
 /*                            Philo routine                                 */
 /****************************************************************************/
 
-int		ft_philo(t_program *data);
+int			ft_philo(t_program *data);
 
 /****************************************************************************/
 /*                            Time functions                                */
 /****************************************************************************/
 
-int		ft_init_start_time(t_philo *philo);
+int			ft_init_start_time(t_philo *philo);
+long int	ft_get_time(void);
 
 /****************************************************************************/
 /*                            Error management                              */
@@ -92,15 +97,15 @@ enum	e_errors
 	MANY_ARGS = 1,
 };
 
-int		ft_args_err(int err);
-int		ft_format_err(int index, char **argv);
+int			ft_args_err(int err);
+int			ft_format_err(int index, char **argv);
 
 /****************************************************************************/
 /*                                Utils                                     */
 /****************************************************************************/
 
-int		ft_abs(int n);
-int		ft_atoi(const char *nptr, int *error);
-int		ft_putstr_fd(char *s, int fd);
+int			ft_abs(int n);
+int			ft_atoi(const char *nptr, int *error);
+int			ft_putstr_fd(char *s, int fd);
 
 #endif

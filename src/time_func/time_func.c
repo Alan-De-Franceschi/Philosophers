@@ -21,3 +21,12 @@ int	ft_init_start_time(t_philo *philo)
 	philo->start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (EXIT_SUCCESS);
 }
+
+long int	ft_get_time(void)
+{
+	struct timeval	tv;
+
+	if (gettimeofday(&tv, NULL) == -1)
+		return (-1);
+	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
+}

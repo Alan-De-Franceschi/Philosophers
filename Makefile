@@ -37,7 +37,7 @@ SOURCES_INIT 	=	init/init_data.c \
 
 SOURCES_PHILO	=	philo_routine/philo_main.c \
 
-SOURCES_TIME	=	time_func/start_time.c \
+SOURCES_TIME	=	time_func/time_func.c \
 
 SOURCES_ERRORS	=	errors/errors.c \
 

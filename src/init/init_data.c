@@ -56,6 +56,7 @@ static int	ft_init_mutex(t_program *data)
 	pthread_mutex_init(&data->dead_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
+	pthread_mutex_init(&data->exit_lock, NULL);
 	return (EXIT_SUCCESS);
 }
 
@@ -65,6 +66,8 @@ int	ft_init_data(t_program *data, char **argv)
 		return (EXIT_FAILURE);
 	if (ft_init_mutex(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
+	data->dead_flag = 0;
+	data->exit_flag = 0;
 	data->philos  = ft_init_philos(data);
 	if (!data->philos)
 		return (EXIT_FAILURE);
