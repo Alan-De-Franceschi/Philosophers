@@ -36,6 +36,10 @@ SOURCES_INIT 	=	init/init_data.c \
 					init/init_philos.c \
 
 SOURCES_PHILO	=	philo_routine/philo_main.c \
+					philo_routine/eat.c \
+					philo_routine/sleep.c \
+					philo_routine/think.c \
+					philo_routine/death.c \
 
 SOURCES_TIME	=	time_func/time_func.c \
 

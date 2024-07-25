@@ -21,36 +21,15 @@ static void	*ft_thread_routine(void *data)
 	i = 0;
 	while (philo->meals_eaten < philo->nb_eat)
 	{
-		if (philo->id % 2 == 0)
+		if (ft_think(philo) == 1)
+			return (NULL);
+		if (ft_eat(philo) == 1)
+			return (NULL);
+		if (philo->meals_eaten != philo->nb_eat)
 		{
-			pthread_mutex_lock(philo->l_fork);
-			pthread_mutex_lock(philo->write_lock);
-			printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
-			pthread_mutex_unlock(philo->write_lock);
-			pthread_mutex_lock(philo->r_fork);
-			pthread_mutex_lock(philo->write_lock);
-			printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
-			printf("%ld %d is eating\n", ft_get_time(), philo->id);
-			pthread_mutex_unlock(philo->write_lock);
+			if (ft_sleep(philo) == 1)
+				return (NULL);
 		}
-		else
-		{
-			pthread_mutex_lock(philo->r_fork);
-			pthread_mutex_lock(philo->write_lock);
-			printf("%ld %d has taken right fork\n", ft_get_time(), philo->id);
-			pthread_mutex_unlock(philo->write_lock);
-			pthread_mutex_lock(philo->l_fork);
-			pthread_mutex_lock(philo->write_lock);
-			printf("%ld %d has taken left fork\n", ft_get_time(), philo->id);
-			printf("%ld %d is eating\n", ft_get_time(), philo->id);
-			pthread_mutex_unlock(philo->write_lock);
-		}
-		pthread_mutex_lock(philo->meal_lock);
-		++philo->meals_eaten;
-		pthread_mutex_unlock(philo->meal_lock);
-		pthread_mutex_unlock(philo->l_fork);
-		pthread_mutex_unlock(philo->r_fork);
-		
 	}
 	return (NULL);
 }
@@ -58,26 +37,19 @@ static void	*ft_thread_routine(void *data)
 int	ft_philo(t_program *data)
 {
 	int 		i;
-	int			j;
 
 	i = 0;
-	j = 0;
 	while (i < data->nb_philo)
 	{
 		pthread_create(&data->philos[i].tid, NULL, ft_thread_routine, &data->philos[i]);
-		if (ft_init_start_time(&data->philos[i]) == EXIT_FAILURE)
-		{
-			pthread_mutex_lock(&data->exit_lock);
-			data->exit_flag = 1;
-			pthread_mutex_unlock(&data->exit_lock);
-			break;
-		}
+		ft_init_start_time(&data->philos[i]);
 		++i;
 	}
-	while (j <= i && j < data->nb_philo)
+	i = 0;
+	while (i < data->nb_philo)
 	{
-		pthread_join(data->philos[j].tid, NULL);
-		++j;
+		pthread_join(data->philos[i].tid, NULL);
+		++i;
 	}
 	return (EXIT_SUCCESS);
 }

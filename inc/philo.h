@@ -79,6 +79,10 @@ t_philo		*ft_init_philos(t_program *data);
 /****************************************************************************/
 
 int			ft_philo(t_program *data);
+int			ft_eat(t_philo *philo);
+int			ft_sleep(t_philo *philo);
+int			ft_think(t_philo *philo);
+int			ft_death(t_philo *philo);
 
 /****************************************************************************/
 /*                            Time functions                                */
@@ -93,8 +97,8 @@ long int	ft_get_time(void);
 
 enum	e_errors
 {
-	FEW_ARGS = 0,
-	MANY_ARGS = 1,
+	FEW_ARGS	= 0,
+	MANY_ARGS	= 1,
 };
 
 int			ft_args_err(int err);
