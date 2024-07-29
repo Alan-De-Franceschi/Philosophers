@@ -18,22 +18,22 @@ static int	ft_init_args(t_program *data, char **argv)
 
 	err = 0;
 	data->nb_philo = ft_abs(ft_atoi(argv[1], &err));
-	if (err || data->nb_philo == 0)
-		return (ft_format_err(1, argv));
+	if (err || data->nb_philo < 2)
+		return (ft_format_err(1, argv, NB_PHILOS));
 	data->tdeath = ft_abs(ft_atoi(argv[2], &err));
 	if (err || data->tdeath == 0)
-		return (ft_format_err(2, argv));
+		return (ft_format_err(2, argv, WRONG_ARGS));
 	data->teat = ft_abs(ft_atoi(argv[3], &err));
 	if (err || data->teat == 0)
-		return (ft_format_err(3, argv));
+		return (ft_format_err(3, argv, WRONG_ARGS));
 	data->tsleep = ft_abs(ft_atoi(argv[4], &err));
 	if (err || data->tsleep == 0)
-		return (ft_format_err(4, argv));
+		return (ft_format_err(4, argv, WRONG_ARGS));
 	if (argv[5])
 	{
 		data->nb_eat = ft_abs(ft_atoi(argv[5], &err));
 		if (err || data->nb_eat == 0)
-			return (ft_format_err(5, argv));
+			return (ft_format_err(5, argv, WRONG_ARGS));
 	}
 	else
 		data->nb_eat = -1;
@@ -56,7 +56,6 @@ static int	ft_init_mutex(t_program *data)
 	pthread_mutex_init(&data->dead_lock, NULL);
 	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
-	pthread_mutex_init(&data->exit_lock, NULL);
 	return (EXIT_SUCCESS);
 }
 
@@ -67,7 +66,6 @@ int	ft_init_data(t_program *data, char **argv)
 	if (ft_init_mutex(data) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	data->dead_flag = 0;
-	data->exit_flag = 0;
 	data->philos  = ft_init_philos(data);
 	if (!data->philos)
 		return (EXIT_FAILURE);

@@ -25,7 +25,7 @@ int	ft_death(t_philo *philo)
 		if (ft_get_time() - philo->start_time >= philo->tdeath)
 		{
 			*philo->dead = 1;
-			printf("%ld %d died\n", ft_get_time(), philo->id);
+			printf("%ld %d died\n", ft_print_time(philo), philo->id);
 			pthread_mutex_unlock(philo->dead_lock);
 			return (1);
 		}
@@ -35,7 +35,7 @@ int	ft_death(t_philo *philo)
 		if (ft_get_time() - philo->eat_time >= philo->tdeath)
 		{
 			*philo->dead = 1;
-			printf("%ld %d died\n", ft_get_time(), philo->id);
+			printf("%ld %d died\n", ft_print_time(philo), philo->id);
 			pthread_mutex_unlock(philo->dead_lock);
 			return (1);
 		}

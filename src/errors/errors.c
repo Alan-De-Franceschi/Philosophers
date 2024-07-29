@@ -27,9 +27,12 @@ int	ft_args_err(int err)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_format_err(int index, char **argv)
+int	ft_format_err(int index, char **argv, int err)
 {
 	ft_putstr_fd(argv[index], 2);
-	ft_putstr_fd(": non null numeric argument required", 2);
+	if (err == WRONG_ARGS)
+		ft_putstr_fd(": non null numeric argument required", 2);
+	else if (err == NB_PHILOS)
+		ft_putstr_fd(": nb philosophers must be numeric argument greater than 2", 2);
 	return (EXIT_FAILURE);
 }

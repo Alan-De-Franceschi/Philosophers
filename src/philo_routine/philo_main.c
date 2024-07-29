@@ -15,10 +15,10 @@
 static void	*ft_thread_routine(void *data)
 {
 	t_philo		*philo;
-	int			i;
 
 	philo = (t_philo *)data;
-	i = 0;
+	if (philo->id % 2 == 0)
+			usleep(philo->teat * 1000);
 	while (philo->meals_eaten < philo->nb_eat)
 	{
 		if (ft_think(philo) == 1)

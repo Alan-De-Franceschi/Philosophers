@@ -16,17 +16,25 @@ int	ft_init_start_time(t_philo *philo)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL) == -1)
-		return (EXIT_FAILURE);
+	gettimeofday(&tv, NULL);
 	philo->start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (EXIT_SUCCESS);
+}
+
+long int	ft_print_time(t_philo *philo)
+{
+	struct timeval	tv;
+	long int		time;
+
+	gettimeofday(&tv, NULL);
+	time = ((tv.tv_sec * 1000) + (tv.tv_usec / 1000)) - philo->start_time;
+	return (time);
 }
 
 long int	ft_get_time(void)
 {
 	struct timeval	tv;
 
-	if (gettimeofday(&tv, NULL) == -1)
-		return (-1);
+	gettimeofday(&tv, NULL);
 	return ((tv.tv_sec * 1000) + (tv.tv_usec / 1000));
 }

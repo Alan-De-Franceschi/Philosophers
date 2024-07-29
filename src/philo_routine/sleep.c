@@ -20,7 +20,7 @@ int	ft_sleep(t_philo *philo)
 		pthread_mutex_unlock(philo->write_lock);
 		return (1);
 	}
-	printf("%ld %d is sleeping\n", ft_get_time(), philo->id);
+	printf("%ld %d is sleeping\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	usleep(philo->tsleep * 1000);
 	return (0);

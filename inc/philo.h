@@ -41,13 +41,11 @@ typedef struct s_philo
 	long int		start_time;
 	long int		eat_time;
 	int				*dead;
-	int				*exit;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*meal_lock;
-	pthread_mutex_t	*exit_lock;
 }	t_philo;
 
 typedef struct s_program
@@ -58,12 +56,10 @@ typedef struct s_program
 	int				tsleep;
 	int				nb_eat;
 	int				dead_flag;
-	int				exit_flag;
 	pthread_mutex_t *fork_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	write_lock;
-	pthread_mutex_t	exit_lock;
 	t_philo			*philos;
 }	t_program;
 
@@ -90,6 +86,7 @@ int			ft_death(t_philo *philo);
 
 int			ft_init_start_time(t_philo *philo);
 long int	ft_get_time(void);
+long int	ft_print_time(t_philo *philo);
 
 /****************************************************************************/
 /*                            Error management                              */
@@ -99,10 +96,12 @@ enum	e_errors
 {
 	FEW_ARGS	= 0,
 	MANY_ARGS	= 1,
+	WRONG_ARGS	= 2,
+	NB_PHILOS	= 3,
 };
 
 int			ft_args_err(int err);
-int			ft_format_err(int index, char **argv);
+int			ft_format_err(int index, char **argv, int err);
 
 /****************************************************************************/
 /*                                Utils                                     */
