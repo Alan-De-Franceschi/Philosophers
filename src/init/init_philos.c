@@ -36,7 +36,6 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].nb_eat = data->nb_eat;
 		philos[i].write_lock = &data->write_lock;
 		philos[i].dead_lock = &data->dead_lock;
-		philos[i].meal_lock = &data->meal_lock;
 		philos[i].tid = 0;
 		philos[i].id = 1 + i;
 		philos[i].eating = 0;
@@ -44,6 +43,8 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].start_time = 0;
 		philos[i].eat_time = 0;
 		philos[i].dead = &data->dead_flag;
+		pthread_mutex_init(&philos[i].meal_lock, NULL);
+		pthread_mutex_init(&philos[i].time_lock, NULL);
 		++i;
 	}
 }

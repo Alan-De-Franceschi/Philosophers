@@ -54,7 +54,6 @@ static int	ft_init_mutex(t_program *data)
 		++i;
 	}
 	pthread_mutex_init(&data->dead_lock, NULL);
-	pthread_mutex_init(&data->meal_lock, NULL);
 	pthread_mutex_init(&data->write_lock, NULL);
 	return (EXIT_SUCCESS);
 }
