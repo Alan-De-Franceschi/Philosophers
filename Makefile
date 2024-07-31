@@ -40,6 +40,7 @@ SOURCES_PHILO	=	philo_routine/philo_main.c \
 					philo_routine/sleep.c \
 					philo_routine/think.c \
 					philo_routine/death.c \
+					philo_routine/end.c \
 
 SOURCES_TIME	=	time_func/time_func.c \
 

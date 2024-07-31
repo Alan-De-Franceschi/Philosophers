@@ -19,17 +19,15 @@ static void	*ft_thread_routine(void *data)
 	philo = (t_philo *)data;
 	if (philo->id % 2 == 0)
 			usleep(philo->teat * 1000);
-	while (philo->meals_eaten != philo->nb_eat)
+	while (1)
 	{
 		if (ft_think(philo) == 1)
 			return (NULL);
 		if (ft_eat(philo) == 1)
 			return (NULL);
-		if (philo->meals_eaten != philo->nb_eat)
-		{
-			if (ft_sleep(philo) == 1)
-				return (NULL);
-		}
+		if (ft_sleep(philo) == 1)
+			return (NULL);
+		usleep(10);
 	}
 	return (NULL);
 }
@@ -45,11 +43,13 @@ static void	*ft_checker_routine(void *data)
 		i = 0;
 		while (i < program->nb_philo)
 		{
+			if (ft_end(program, &program->philos[i]) == 1)
+				return (NULL);
 			if (ft_death(program, &program->philos[i]) == 1)
 				return (NULL);
 			++i;
 		}
-		usleep(50);
+		usleep(10);
 	}
 	return (NULL);
 }

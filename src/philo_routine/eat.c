@@ -16,25 +16,25 @@ static int	ft_even_philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead)
+	if (*philo->dead || *philo->exit)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->r_fork);
 		return (1);
 	}
-	printf("%ld %d has taken left fork\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mhas taken left fork\033[0m\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead)
+	if (*philo->dead || *philo->exit)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->l_fork);
 		pthread_mutex_unlock(philo->r_fork);
 		return (1);
 	}
-	printf("%ld %d has taken right fork\n", ft_print_time(philo), philo->id);
-	printf("%ld %d is eating\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mhas taken right fork\033[0m\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mis eating\033[0m\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(&philo->time_lock);
 	philo->eat_time = ft_get_time();
@@ -52,25 +52,25 @@ static int	ft_odd_philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead)
+	if (*philo->dead || *philo->exit)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->l_fork);
 		return (1);
 	}
-	printf("%ld %d has taken right fork\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mhas taken right fork\033[0m\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead)
+	if (*philo->dead || *philo->exit)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->r_fork);
 		pthread_mutex_unlock(philo->l_fork);
 		return (1);
 	}
-	printf("%ld %d has taken left fork\n", ft_print_time(philo), philo->id);
-	printf("%ld %d is eating\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mhas taken left fork\033[0m\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mis eating\033[0m\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(&philo->time_lock);
 	philo->eat_time = ft_get_time();

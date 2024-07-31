@@ -15,12 +15,12 @@
 int	ft_think(t_philo *philo)
 {
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead)
+	if (*philo->dead || *philo->exit)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		return (1);
 	}
-	printf("%ld %d is thinking\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mis thinking\033[0m\n", ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	return (0);
 }

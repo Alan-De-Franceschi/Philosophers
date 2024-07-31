@@ -36,11 +36,12 @@ typedef struct s_philo
 	int				teat;
 	int				tsleep;
 	int				nb_eat;
-	int				eating;
 	int				meals_eaten;
+	int				end;
 	long int		start_time;
 	long int		eat_time;
 	int				*dead;
+	int				*exit;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	time_lock;
 	pthread_mutex_t	*r_fork;
@@ -57,7 +58,9 @@ typedef struct s_program
 	int				teat;
 	int				tsleep;
 	int				nb_eat;
+	int				finished_philo;
 	int				dead_flag;
+	int				exit_flag;
 	pthread_mutex_t *fork_lock;
 	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	write_lock;
@@ -80,6 +83,7 @@ int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);
+int			ft_end(t_program *data, t_philo *philo);
 
 /****************************************************************************/
 /*                            Time functions                                */

@@ -38,11 +38,12 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].dead_lock = &data->dead_lock;
 		philos[i].tid = 0;
 		philos[i].id = 1 + i;
-		philos[i].eating = 0;
+		philos[i].end = 0;
 		philos[i].meals_eaten = 0;
 		philos[i].start_time = 0;
 		philos[i].eat_time = 0;
 		philos[i].dead = &data->dead_flag;
+		philos[i].exit = &data->exit_flag;
 		pthread_mutex_init(&philos[i].meal_lock, NULL);
 		pthread_mutex_init(&philos[i].time_lock, NULL);
 		++i;
