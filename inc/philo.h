@@ -40,14 +40,12 @@ typedef struct s_philo
 	int				finished;
 	long int		start_time;
 	long int		eat_time;
-	int				*dead;
 	int				*end;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	time_lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
 	pthread_mutex_t	*write_lock;
-	pthread_mutex_t	*dead_lock;
 	pthread_mutex_t	*end_lock;
 }	t_philo;
 
@@ -60,10 +58,8 @@ typedef struct s_program
 	int				tsleep;
 	int				nb_eat;
 	int				finished_philo;
-	int				dead_flag;
 	int				end_flag;
 	pthread_mutex_t *fork_lock;
-	pthread_mutex_t	dead_lock;
 	pthread_mutex_t	end_lock;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
@@ -83,7 +79,6 @@ t_philo		*ft_init_philos(t_program *data);
 int			ft_philo(t_program *data);
 int			ft_eat(t_philo *philo);
 int			ft_sleep(t_philo *philo);
-//int			ft_wait(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_check_end(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);

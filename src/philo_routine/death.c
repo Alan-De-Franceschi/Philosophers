@@ -20,9 +20,9 @@ int	ft_death(t_program *data, t_philo *philo)
 		pthread_mutex_unlock(&philo->meal_lock);
 		if (ft_get_time() - philo->start_time >= philo->tdeath)
 		{
-			pthread_mutex_lock(&data->dead_lock);
-			data->dead_flag = 1;
-			pthread_mutex_unlock(&data->dead_lock);
+			pthread_mutex_lock(&data->end_lock);
+			data->end_flag = 1;
+			pthread_mutex_unlock(&data->end_lock);
 			pthread_mutex_lock(&data->write_lock);
 			printf("\033[0;31m%ld %d died\033[0m\n", ft_print_time(philo), philo->id);
 			pthread_mutex_unlock(&data->write_lock);
@@ -36,9 +36,9 @@ int	ft_death(t_program *data, t_philo *philo)
 		if (ft_get_time() - philo->eat_time >= philo->tdeath)
 		{
 			pthread_mutex_unlock(&philo->time_lock);
-			pthread_mutex_lock(&data->dead_lock);
-			data->dead_flag = 1;
-			pthread_mutex_unlock(&data->dead_lock);
+			pthread_mutex_lock(&data->end_lock);
+			data->end_flag = 1;
+			pthread_mutex_unlock(&data->end_lock);
 			pthread_mutex_lock(&data->write_lock);
 			printf("\033[0;31m%ld %d died\033[0m\n", ft_print_time(philo), philo->id);
 			pthread_mutex_unlock(&data->write_lock);
