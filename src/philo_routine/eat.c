@@ -16,7 +16,7 @@ static int	ft_even_philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead || *philo->exit)
+	if (ft_check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->r_fork);
@@ -26,7 +26,7 @@ static int	ft_even_philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead || *philo->exit)
+	if (ft_check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->l_fork);
@@ -52,7 +52,7 @@ static int	ft_odd_philo_eat(t_philo *philo)
 {
 	pthread_mutex_lock(philo->l_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead || *philo->exit)
+	if (ft_check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->l_fork);
@@ -62,7 +62,7 @@ static int	ft_odd_philo_eat(t_philo *philo)
 	pthread_mutex_unlock(philo->write_lock);
 	pthread_mutex_lock(philo->r_fork);
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead || *philo->exit)
+	if (ft_check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		pthread_mutex_unlock(philo->r_fork);

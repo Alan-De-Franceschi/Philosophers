@@ -15,7 +15,7 @@
 int	ft_sleep(t_philo *philo)
 {
 	pthread_mutex_lock(philo->write_lock);
-	if (*philo->dead || *philo->exit)
+	if (ft_check_end(philo) == 1)
 	{
 		pthread_mutex_unlock(philo->write_lock);
 		return (1);

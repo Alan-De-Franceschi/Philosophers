@@ -1,26 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   think.c                                            :+:      :+:    :+:   */
+/*   check_end.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:37:52 by ade-fran          #+#    #+#             */
-/*   Updated: 2024/07/25 15:37:54 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/08/02 15:56:35 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/08/02 15:56:36 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_think(t_philo *philo)
+int	ft_check_end(t_philo *philo)
 {
-	pthread_mutex_lock(philo->write_lock);
-	if (ft_check_end(philo) == 1)
+	pthread_mutex_lock(philo->dead_lock);
+	if (*philo->dead)
 	{
-		pthread_mutex_unlock(philo->write_lock);
+		pthread_mutex_unlock(philo->dead_lock);
 		return (1);
 	}
-	printf("\033[0;33m%ld\033[0m %d \033[0;36mis thinking\033[0m\n", ft_print_time(philo), philo->id);
-	pthread_mutex_unlock(philo->write_lock);
+	pthread_mutex_unlock(philo->dead_lock);
+	pthread_mutex_lock(philo->end_lock);
+	if (*philo->end)
+	{
+		pthread_mutex_unlock(philo->end_lock);
+		return (1);
+	}
+	pthread_mutex_unlock(philo->end_lock);
 	return (0);
 }
