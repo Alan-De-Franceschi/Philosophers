@@ -50,11 +50,28 @@ static int	ft_init_mutex(t_program *data)
 		return (EXIT_FAILURE);
 	while (i < data->nb_philo)
 	{
-		pthread_mutex_init(&data->fork_lock[i], NULL);
+		data->err = pthread_mutex_init(&data->fork_lock[i], NULL);
+		if (data->err)
+		{
+			data->err = MUTEX_ERR;
+			return (EXIT_FAILURE);
+		}
 		++i;
+		++data->nb_fork;
 	}
-	pthread_mutex_init(&data->end_lock, NULL);
-	pthread_mutex_init(&data->write_lock, NULL);
+	data->err = pthread_mutex_init(&data->end_lock, NULL);
+	if (data->err)
+	{
+		data->err = MUTEX_ERR;
+		return (EXIT_FAILURE);
+	}
+	data->err = pthread_mutex_init(&data->write_lock, NULL);
+	if (data->err)
+	{
+		pthread_mutex_destroy(&data->end_lock);
+		data->err = MUTEX_ERR;
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -62,10 +79,15 @@ int	ft_init_data(t_program *data, char **argv)
 {
 	if (ft_init_args(data, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	if (ft_init_mutex(data) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+	data->nb_thread = 0;
 	data->finished_philo = 0;
 	data->end_flag = 0;
+	data->err = 0;
+	data->nb_fork = 0;
+	data->philos = NULL;
+	data->fork_lock = NULL;
+	if (ft_init_mutex(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	data->philos = ft_init_philos(data);
 	if (!data->philos)
 		return (EXIT_FAILURE);

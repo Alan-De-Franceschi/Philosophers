@@ -65,17 +65,23 @@ int	ft_philo(t_program *data)
 	while (i <= data->nb_philo)
 	{
 		if (i == data->nb_philo)
-			pthread_create(&data->checker_tid, NULL, ft_checker_routine, data);
+			data->err = pthread_create(&data->checker_tid, NULL, ft_checker_routine, data);
 		else
 		{
 			ft_init_start_time(&data->philos[i]);
-			pthread_create(&data->philos[i].tid, NULL, ft_thread_routine,
+			data->err = pthread_create(&data->philos[i].tid, NULL, ft_thread_routine,
 				&data->philos[i]);
 		}
+		if (data->err)
+		{
+			data->err = THREAD_ERR;
+			break ;
+		}
 		++i;
+		++data->nb_thread;
 	}
 	i = 0;
-	while (i <= data->nb_philo)
+	while (i < data->nb_thread)
 	{
 		if (i == data->nb_philo)
 			pthread_join(data->checker_tid, NULL);

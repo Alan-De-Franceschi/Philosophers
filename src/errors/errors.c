@@ -36,3 +36,12 @@ int	ft_format_err(int index, char **argv, int err)
 		ft_putstr_fd(": nb philo must be numeric argument greater than 1", 2);
 	return (EXIT_FAILURE);
 }
+
+void	ft_sys_err(int err)
+{
+	if (err == THREAD_ERR)
+		ft_putstr_fd("\033[0;31mpthread create : error\033[0m\n", 2);
+	if (err == MUTEX_ERR)
+		ft_putstr_fd("\033[0;31mmutex init : error\033[0m\n", 2);
+	return ;
+}

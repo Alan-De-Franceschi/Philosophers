@@ -53,13 +53,16 @@ typedef struct s_program
 {
 	pthread_t		checker_tid;
 	int				nb_philo;
+	int				nb_thread;
 	int				tdeath;
 	int				teat;
 	int				tsleep;
 	int				nb_eat;
 	int				finished_philo;
 	int				end_flag;
+	int				err;
 	pthread_mutex_t	*fork_lock;
+	int				nb_fork;
 	pthread_mutex_t	end_lock;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
@@ -112,10 +115,13 @@ enum	e_errors
 	MANY_ARGS	= 1,
 	WRONG_ARGS	= 2,
 	NB_PHILOS	= 3,
+	THREAD_ERR	= 4,
+	MUTEX_ERR	= 5,
 };
 
 int			ft_args_err(int err);
 int			ft_format_err(int index, char **argv, int err);
+void		ft_sys_err(int err);
 
 /****************************************************************************/
 /*                                Utils                                     */

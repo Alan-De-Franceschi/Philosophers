@@ -40,6 +40,7 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].id = 1 + i;
 		philos[i].end = 0;
 		philos[i].meals_eaten = 0;
+		philos[i].finished = 0;
 		philos[i].start_time = 0;
 		philos[i].eat_time = 0;
 		philos[i].end = &data->end_flag;

@@ -26,13 +26,15 @@ static void	ft_free_forks(pthread_mutex_t	*fork_lock, int nb_fork)
 	return ;
 }
 
-static void	ft_free_philos(t_philo *philos, int nb_philo)
+static void	ft_free_philos(t_philo *philos, int nb_thread, int nb_philo)
 {
 	int	i;
 
 	i = 0;
-	while (i < nb_philo)
+	while (i < nb_thread)
 	{
+		if (i == nb_philo)
+			break ;
 		pthread_mutex_destroy(&philos[i].meal_lock);
 		pthread_mutex_destroy(&philos[i].time_lock);
 		++i;
@@ -43,9 +45,9 @@ static void	ft_free_philos(t_philo *philos, int nb_philo)
 
 void	ft_free_data(t_program *data)
 {
-	ft_free_forks(data->fork_lock, data->nb_philo);
-	pthread_mutex_destroy(&data->end_lock);
-	pthread_mutex_destroy(&data->write_lock);
-	ft_free_philos(data->philos, data->nb_philo);
+	if (data->err)
+		ft_sys_err(data->err);
+	ft_free_forks(data->fork_lock, data->nb_fork);
+	ft_free_philos(data->philos, data->nb_philo, data->nb_philo);
 	return ;
 }

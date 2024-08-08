@@ -28,8 +28,9 @@ int	main(int argc, char **argv)
 	if (ft_check_args(argc) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	if (ft_init_data(&data, argv) == EXIT_FAILURE)
-		return (EXIT_FAILURE);
+		return (ft_free_data(&data), EXIT_FAILURE);
 	ft_philo(&data);
-	ft_free_data(&data);
-	return (EXIT_SUCCESS);
+	pthread_mutex_destroy(&data.end_lock);
+	pthread_mutex_destroy(&data.write_lock);
+	return (ft_free_data(&data), EXIT_SUCCESS);
 }
