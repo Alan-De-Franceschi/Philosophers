@@ -38,6 +38,7 @@ SOURCES_INIT 	=	init/init_data.c \
 SOURCES_PHILO	=	philo_routine/philo_main.c \
 					philo_routine/eat_routine/eat.c \
 					philo_routine/eat_routine/even_philo.c \
+					philo_routine/eat_routine/odd_philo.c \
 					philo_routine/sleep.c \
 					philo_routine/think.c \
 					philo_routine/wait.c \
