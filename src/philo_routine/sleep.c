@@ -20,8 +20,10 @@ int	ft_sleep(t_philo *philo)
 		pthread_mutex_unlock(philo->write_lock);
 		return (1);
 	}
-	printf("\033[0;33m%ld\033[0m %d \033[0;36mis sleeping\033[0m\n", ft_print_time(philo), philo->id);
+	printf("\033[0;33m%ld\033[0m %d \033[0;36mis sleeping\033[0m\n",
+		ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
-	usleep(philo->tsleep * 1000);
+	if (ft_sleep_wait(philo) == 1)
+		return (1);
 	return (0);
 }

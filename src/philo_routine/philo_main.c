@@ -18,7 +18,10 @@ static void	*ft_thread_routine(void *data)
 
 	philo = (t_philo *)data;
 	if (philo->id % 2 == 0)
-			usleep(philo->teat * 1000);
+	{
+		if (ft_eat_wait(philo) == 1)
+			return (NULL);
+	}	
 	while (1)
 	{
 		if (ft_think(philo) == 1)
@@ -35,7 +38,7 @@ static void	*ft_thread_routine(void *data)
 static void	*ft_checker_routine(void *data)
 {
 	t_program	*program;
-	int i;
+	int			i;
 
 	program = (t_program *)data;
 	while (1)
@@ -56,7 +59,7 @@ static void	*ft_checker_routine(void *data)
 
 int	ft_philo(t_program *data)
 {
-	int 		i;
+	int	i;
 
 	i = 0;
 	while (i <= data->nb_philo)
@@ -66,7 +69,8 @@ int	ft_philo(t_program *data)
 		else
 		{
 			ft_init_start_time(&data->philos[i]);
-			pthread_create(&data->philos[i].tid, NULL, ft_thread_routine, &data->philos[i]);
+			pthread_create(&data->philos[i].tid, NULL, ft_thread_routine,
+				&data->philos[i]);
 		}
 		++i;
 	}

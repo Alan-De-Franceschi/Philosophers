@@ -59,7 +59,7 @@ typedef struct s_program
 	int				nb_eat;
 	int				finished_philo;
 	int				end_flag;
-	pthread_mutex_t *fork_lock;
+	pthread_mutex_t	*fork_lock;
 	pthread_mutex_t	end_lock;
 	pthread_mutex_t	write_lock;
 	t_philo			*philos;
@@ -78,7 +78,11 @@ t_philo		*ft_init_philos(t_program *data);
 
 int			ft_philo(t_program *data);
 int			ft_eat(t_philo *philo);
+int			ft_even_philo_eat(t_philo *philo);
+int			ft_odd_philo_eat(t_philo *philo);
+int			ft_eat_wait(t_philo *philo);
 int			ft_sleep(t_philo *philo);
+int			ft_sleep_wait(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_check_end(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);

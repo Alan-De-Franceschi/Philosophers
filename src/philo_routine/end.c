@@ -28,7 +28,8 @@ int	ft_end(t_program *data, t_philo *philo)
 				data->end_flag = 1;
 				pthread_mutex_unlock(&data->end_lock);
 				pthread_mutex_lock(&data->write_lock);
-				printf("\033[0;32mThe %d philosophers ate their %d meals\033[0m\n", data->nb_philo, data->nb_eat);
+				printf("\033[0;32mThe %d philosophers ate their %d meals\033[0m\n",
+					data->nb_philo, data->nb_eat);
 				pthread_mutex_unlock(&data->write_lock);
 				return (1);
 			}

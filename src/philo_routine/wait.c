@@ -1,27 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   think.c                                            :+:      :+:    :+:   */
+/*   wait.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/07/25 15:37:52 by ade-fran          #+#    #+#             */
-/*   Updated: 2024/07/25 15:37:54 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/08/08 11:53:02 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/08/08 11:53:06 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_think(t_philo *philo)
+int	ft_eat_wait(t_philo *philo)
 {
-	pthread_mutex_lock(philo->write_lock);
-	if (ft_check_end(philo) == 1)
+	int	count;
+
+	count = 0;
+	while (count < philo->teat)
 	{
-		pthread_mutex_unlock(philo->write_lock);
-		return (1);
+		usleep(10 * 1000);
+		if (ft_check_end(philo) == 1)
+			return (1);
+		count += 10;
 	}
-	printf("\033[0;33m%ld\033[0m %d \033[0;36mis thinking\033[0m\n",
-		ft_print_time(philo), philo->id);
-	pthread_mutex_unlock(philo->write_lock);
+	return (0);
+}
+
+int	ft_sleep_wait(t_philo *philo)
+{
+	int	count;
+
+	count = 0;
+	while (count < philo->tsleep)
+	{
+		usleep(10 * 1000);
+		if (ft_check_end(philo) == 1)
+			return (1);
+		count += 10;
+	}
 	return (0);
 }

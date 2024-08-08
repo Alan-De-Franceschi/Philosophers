@@ -52,7 +52,7 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 t_philo	*ft_init_philos(t_program *data)
 {
 	t_philo	*philos;
-	
+
 	philos = malloc(sizeof(t_philo) * (data->nb_philo));
 	if (!philos)
 		return (NULL);

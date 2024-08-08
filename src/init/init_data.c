@@ -42,7 +42,7 @@ static int	ft_init_args(t_program *data, char **argv)
 
 static int	ft_init_mutex(t_program *data)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	data->fork_lock = malloc(sizeof(pthread_mutex_t) * (data->nb_philo));
@@ -66,7 +66,7 @@ int	ft_init_data(t_program *data, char **argv)
 		return (EXIT_FAILURE);
 	data->finished_philo = 0;
 	data->end_flag = 0;
-	data->philos  = ft_init_philos(data);
+	data->philos = ft_init_philos(data);
 	if (!data->philos)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
