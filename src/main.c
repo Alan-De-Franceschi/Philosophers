@@ -30,5 +30,6 @@ int	main(int argc, char **argv)
 	if (ft_init_data(&data, argv) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
 	ft_philo(&data);
+	ft_free_data(&data);
 	return (EXIT_SUCCESS);
 }

@@ -48,6 +48,8 @@ SOURCES_PHILO	=	philo_routine/philo_main.c \
 
 SOURCES_TIME	=	time_func/time_func.c \
 
+SOURCES_FREE	=	free/free_data.c \
+
 SOURCES_ERRORS	=	errors/errors.c \
 
 SOURCES_UTILS	=	utils/utils.c	\
@@ -65,6 +67,7 @@ OBJECTS			=	$(addprefix ${OBJECTS_PATH}, ${SOURCES_MAIN:.c=.o}) \
 					$(addprefix ${OBJECTS_PATH}, ${SOURCES_INIT:.c=.o}) \
 					$(addprefix ${OBJECTS_PATH}, ${SOURCES_PHILO:.c=.o}) \
 					$(addprefix ${OBJECTS_PATH}, ${SOURCES_TIME:.c=.o}) \
+					$(addprefix ${OBJECTS_PATH}, ${SOURCES_FREE:.c=.o}) \
 					$(addprefix ${OBJECTS_PATH}, ${SOURCES_ERRORS:.c=.o}) \
 					$(addprefix ${OBJECTS_PATH}, ${SOURCES_UTILS:.c=.o}) \
 
