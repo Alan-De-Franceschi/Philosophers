@@ -20,6 +20,7 @@ static void	ft_assign_forks(t_program *data, t_philo *philo, int nb_philos,
 		philo->r_fork = &data->fork_lock[nb_philos - 1];
 	else
 		philo->r_fork = &data->fork_lock[index - 1];
+	return ;
 }
 
 static void	ft_fill_philos(t_philo *philos, t_program *data)
@@ -44,10 +45,45 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].start_time = 0;
 		philos[i].eat_time = 0;
 		philos[i].end = &data->end_flag;
-		pthread_mutex_init(&philos[i].meal_lock, NULL);
-		pthread_mutex_init(&philos[i].time_lock, NULL);
 		++i;
 	}
+	return ;
+}
+
+static int	ft_mutex_err(t_program *data, t_philo *philos, int nb_mlock,
+	int nb_tlock)
+{
+	pthread_mutex_destroy(&data->end_lock);
+	pthread_mutex_destroy(&data->write_lock);
+	ft_destroy_mlock(philos, nb_mlock);
+	ft_destroy_tlock(philos, nb_tlock);
+	data->err = MUTEX_ERR;
+	free(philos);
+	return (EXIT_FAILURE);
+}
+
+static int	ft_init_philo_mutex(t_philo *philos, t_program *data)
+{
+	int	i;
+	int	nb_mlock;
+	int	nb_tlock;
+
+	i = 0;
+	nb_mlock = 0;
+	nb_tlock = 0;
+	while (i < data->nb_philo)
+	{
+		data->err = pthread_mutex_init(&philos[i].meal_lock, NULL);
+		if (data->err)
+			return (ft_mutex_err(data, philos, nb_mlock, nb_tlock));
+		++nb_mlock;
+		data->err = pthread_mutex_init(&philos[i].time_lock, NULL);
+		if (data->err)
+			return (ft_mutex_err(data, philos, nb_mlock, nb_tlock));
+		++nb_tlock;
+		++i;
+	}
+	return (EXIT_SUCCESS);
 }
 
 t_philo	*ft_init_philos(t_program *data)
@@ -58,5 +94,7 @@ t_philo	*ft_init_philos(t_program *data)
 	if (!philos)
 		return (NULL);
 	ft_fill_philos(philos, data);
+	if (ft_init_philo_mutex(philos, data) == EXIT_FAILURE)
+		return (NULL);
 	return (philos);
 }

@@ -80,6 +80,7 @@ t_philo		*ft_init_philos(t_program *data);
 /****************************************************************************/
 
 int			ft_philo(t_program *data);
+void		ft_join_philos(t_program *data);
 int			ft_eat(t_philo *philo);
 int			ft_even_philo_eat(t_philo *philo);
 int			ft_odd_philo_eat(t_philo *philo);
@@ -104,6 +105,8 @@ long int	ft_print_time(t_philo *philo);
 /****************************************************************************/
 
 void		ft_free_data(t_program *data);
+void		ft_destroy_mlock(t_philo *philos, int nb_mlock);
+void		ft_destroy_tlock(t_philo *philos, int nb_tlock);
 
 /****************************************************************************/
 /*                            Error management                              */

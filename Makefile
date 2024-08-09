@@ -36,6 +36,7 @@ SOURCES_INIT 	=	init/init_data.c \
 					init/init_philos.c \
 
 SOURCES_PHILO	=	philo_routine/philo_main.c \
+					philo_routine/join_philos.c \
 					philo_routine/eat_routine/eat.c \
 					philo_routine/eat_routine/even_philo.c \
 					philo_routine/eat_routine/odd_philo.c \
@@ -49,6 +50,7 @@ SOURCES_PHILO	=	philo_routine/philo_main.c \
 SOURCES_TIME	=	time_func/time_func.c \
 
 SOURCES_FREE	=	free/free_data.c \
+					free/destroy_philos_mutex.c \
 
 SOURCES_ERRORS	=	errors/errors.c \
 

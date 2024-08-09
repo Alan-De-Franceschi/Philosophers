@@ -57,6 +57,14 @@ static void	*ft_checker_routine(void *data)
 	return (NULL);
 }
 
+static void	ft_thread_create_err(t_program *data)
+{
+	data->err = THREAD_ERR;
+	pthread_mutex_lock(&data->end_lock);
+	data->end_flag = 1;
+	pthread_mutex_unlock(&data->end_lock);
+}
+
 int	ft_philo(t_program *data)
 {
 	int	i;
@@ -65,29 +73,22 @@ int	ft_philo(t_program *data)
 	while (i <= data->nb_philo)
 	{
 		if (i == data->nb_philo)
-			data->err = pthread_create(&data->checker_tid, NULL, ft_checker_routine, data);
+			data->err = pthread_create(&data->checker_tid, NULL,
+					ft_checker_routine, data);
 		else
 		{
 			ft_init_start_time(&data->philos[i]);
-			data->err = pthread_create(&data->philos[i].tid, NULL, ft_thread_routine,
-				&data->philos[i]);
+			data->err = pthread_create(&data->philos[i].tid, NULL,
+					ft_thread_routine, &data->philos[i]);
 		}
 		if (data->err)
 		{
-			data->err = THREAD_ERR;
+			ft_thread_create_err(data);
 			break ;
 		}
 		++i;
 		++data->nb_thread;
 	}
-	i = 0;
-	while (i < data->nb_thread)
-	{
-		if (i == data->nb_philo)
-			pthread_join(data->checker_tid, NULL);
-		else
-			pthread_join(data->philos[i].tid, NULL);
-		++i;
-	}
+	ft_join_philos(data);
 	return (EXIT_SUCCESS);
 }

@@ -1,53 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_data.c                                        :+:      :+:    :+:   */
+/*   destroy_philos_mutex.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ade-fran <ade-fran@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/08/08 13:59:23 by ade-fran          #+#    #+#             */
-/*   Updated: 2024/08/08 13:59:25 by ade-fran         ###   ########.fr       */
+/*   Created: 2024/08/09 12:51:27 by ade-fran          #+#    #+#             */
+/*   Updated: 2024/08/09 12:51:29 by ade-fran         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-static void	ft_free_forks(pthread_mutex_t	*fork_lock, int nb_fork)
+void	ft_destroy_mlock(t_philo *philos, int nb_mlock)
 {
 	int	i;
 
 	i = 0;
-	while (i < nb_fork)
+	while (i < nb_mlock)
 	{
-		pthread_mutex_destroy(&fork_lock[i]);
+		pthread_mutex_destroy(&philos[i].meal_lock);
 		++i;
 	}
-	free(fork_lock);
 	return ;
 }
 
-static void	ft_free_philos(t_philo *philos, int nb_thread, int nb_philo)
+void	ft_destroy_tlock(t_philo *philos, int nb_tlock)
 {
 	int	i;
 
 	i = 0;
-	while (i < nb_thread)
+	while (i < nb_tlock)
 	{
-		if (i == nb_philo)
-			break ;
-		pthread_mutex_destroy(&philos[i].meal_lock);
 		pthread_mutex_destroy(&philos[i].time_lock);
 		++i;
 	}
-	free(philos);
-	return ;
-}
-
-void	ft_free_data(t_program *data)
-{
-	if (data->err)
-		ft_sys_err(data->err);
-	ft_free_forks(data->fork_lock, data->nb_fork);
-	ft_free_philos(data->philos, data->nb_thread, data->nb_philo);
 	return ;
 }
