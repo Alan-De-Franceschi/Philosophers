@@ -40,7 +40,7 @@ static int	ft_init_args(t_program *data, char **argv)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_init_mutex(t_program *data)
+static int	ft_init_fork(t_program *data)
 {
 	int	i;
 
@@ -59,6 +59,13 @@ static int	ft_init_mutex(t_program *data)
 		++i;
 		++data->nb_fork;
 	}
+	return (EXIT_SUCCESS);
+}
+
+static int	ft_init_mutex(t_program *data)
+{
+	if (ft_init_fork(data) == EXIT_FAILURE)
+		return (EXIT_FAILURE);
 	data->err = pthread_mutex_init(&data->end_lock, NULL);
 	if (data->err)
 	{
