@@ -20,7 +20,7 @@ int	ft_sleep(t_philo *philo)
 		pthread_mutex_unlock(philo->write_lock);
 		return (1);
 	}
-	printf("\033[0;33m%ld\033[0m %d \033[0;36mis sleeping\033[0m\n",
+	printf(YELLOW "%ld " END "%d " BLUE "is sleeping\n" END,
 		ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	if (ft_sleep_wait(philo) == 1)

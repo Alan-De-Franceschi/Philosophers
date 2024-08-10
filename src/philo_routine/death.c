@@ -18,7 +18,7 @@ static int	ft_print_death(t_program *data, t_philo *philo)
 	data->end_flag = 1;
 	pthread_mutex_unlock(&data->end_lock);
 	pthread_mutex_lock(&data->write_lock);
-	printf("\033[0;31m%ld %d died\033[0m\n",
+	printf(RED "%ld %d died\n" END,
 		ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(&data->write_lock);
 	return (1);
