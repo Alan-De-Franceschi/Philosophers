@@ -24,8 +24,11 @@ static void	*ft_thread_routine(void *data)
 	}	
 	while (1)
 	{
-		if (ft_think(philo) == 1)
-			return (NULL);
+		if (philo->meals_eaten > 0)
+		{
+			if (ft_think(philo) == 1)
+				return (NULL);
+		}
 		if (ft_eat(philo) == 1)
 			return (NULL);
 		if (ft_sleep(philo) == 1)

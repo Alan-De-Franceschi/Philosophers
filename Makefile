@@ -12,7 +12,7 @@
 
 NAME			=	philo
 
-CFLAGS			=	-Wall -Wextra -Werror -I ${INCLD_DIR} -pthread -g
+CFLAGS			=	-Wall -Wextra -Werror -I ${INCLD_DIR} -pthread
 
 CC				=	cc
 
@@ -93,7 +93,8 @@ all:  ${NAME}
 
 ${NAME}: ${OBJECTS} ${INCLD}
 	@${CC} ${CFLAGS} ${OBJECTS} -o ${NAME}
-	@echo "${COLOUR_GREEN}\33[2K\nPhilo compiled\n${COLOUR_END}"
+	@echo "${COLOUR_GREEN}\33[2K\nPhilo compiled with : \n${COLOUR_END}"
+	@echo "	${CC} ${CFLAGS}\n"
 
 ${OBJECTS_PATH}%.o:	${SOURCES_PATH}%.c
 	@mkdir -p ${dir $@}
@@ -105,7 +106,7 @@ clean:
 fclean:
 	@rm -rf ${OBJECTS_PATH}
 	@rm -f ${NAME}
-	@echo "${COLOUR_GREEN}Philo cleaned\n${COLOUR_END}"
+	@echo "${COLOUR_GREEN}\nPhilo cleaned\n${COLOUR_END}"
 
 re: fclean all
 

@@ -46,7 +46,11 @@ static void	ft_free_philos(t_philo *philos, int nb_thread, int nb_philo)
 void	ft_free_data(t_program *data)
 {
 	if (data->err)
+	{
+		if (data->err == WRONG_ARGS || data->err == NB_PHILOS)
+			return ;
 		ft_sys_err(data->err);
+	}
 	ft_free_forks(data->fork_lock, data->nb_fork);
 	ft_free_philos(data->philos, data->nb_thread, data->nb_philo);
 	return ;

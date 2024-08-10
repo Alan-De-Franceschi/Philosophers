@@ -35,6 +35,7 @@ typedef struct s_philo
 	int				tdeath;
 	int				teat;
 	int				tsleep;
+	int				nb_philo;
 	int				nb_eat;
 	int				meals_eaten;
 	int				finished;
@@ -88,6 +89,7 @@ int			ft_eat_wait(t_philo *philo);
 int			ft_sleep(t_philo *philo);
 int			ft_sleep_wait(t_philo *philo);
 int			ft_think(t_philo *philo);
+int			ft_think_wait(t_philo *philo);
 int			ft_check_end(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);
 int			ft_end(t_program *data, t_philo *philo);
@@ -123,7 +125,7 @@ enum	e_errors
 };
 
 int			ft_args_err(int err);
-int			ft_format_err(int index, char **argv, int err);
+int			ft_format_err(t_program *data, int index, char **argv, int err);
 void		ft_sys_err(int err);
 
 /****************************************************************************/

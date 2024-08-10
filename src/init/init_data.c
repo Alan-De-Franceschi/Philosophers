@@ -19,21 +19,21 @@ static int	ft_init_args(t_program *data, char **argv)
 	err = 0;
 	data->nb_philo = ft_abs(ft_atoi(argv[1], &err));
 	if (err || data->nb_philo < 2)
-		return (ft_format_err(1, argv, NB_PHILOS));
+		return (ft_format_err(data, 1, argv, NB_PHILOS));
 	data->tdeath = ft_abs(ft_atoi(argv[2], &err));
 	if (err || data->tdeath == 0)
-		return (ft_format_err(2, argv, WRONG_ARGS));
+		return (ft_format_err(data, 2, argv, WRONG_ARGS));
 	data->teat = ft_abs(ft_atoi(argv[3], &err));
 	if (err || data->teat == 0)
-		return (ft_format_err(3, argv, WRONG_ARGS));
+		return (ft_format_err(data, 3, argv, WRONG_ARGS));
 	data->tsleep = ft_abs(ft_atoi(argv[4], &err));
 	if (err || data->tsleep == 0)
-		return (ft_format_err(4, argv, WRONG_ARGS));
+		return (ft_format_err(data, 4, argv, WRONG_ARGS));
 	if (argv[5])
 	{
 		data->nb_eat = ft_abs(ft_atoi(argv[5], &err));
 		if (err || data->nb_eat == 0)
-			return (ft_format_err(5, argv, WRONG_ARGS));
+			return (ft_format_err(data, 5, argv, WRONG_ARGS));
 	}
 	else
 		data->nb_eat = -1;

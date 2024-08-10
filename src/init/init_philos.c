@@ -34,6 +34,7 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].tdeath = data->tdeath;
 		philos[i].teat = data->teat;
 		philos[i].tsleep = data->tsleep;
+		philos[i].nb_philo = data->nb_philo;
 		philos[i].nb_eat = data->nb_eat;
 		philos[i].write_lock = &data->write_lock;
 		philos[i].end_lock = &data->end_lock;

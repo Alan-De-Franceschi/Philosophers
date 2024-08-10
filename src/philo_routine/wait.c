@@ -41,3 +41,23 @@ int	ft_sleep_wait(t_philo *philo)
 	}
 	return (0);
 }
+
+int	ft_think_wait(t_philo *philo)
+{
+	int	count;
+	int	time;
+
+	count = 0;
+	if (philo->tsleep <= philo->teat)
+		time = philo->tsleep;
+	else
+		time = philo->teat;
+	while (count < time)
+	{
+		usleep(10 * 1000);
+		if (ft_check_end(philo) == 1)
+			return (1);
+		count += 10;
+	}
+	return (0);
+}

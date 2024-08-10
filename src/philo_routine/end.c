@@ -34,7 +34,8 @@ int	ft_end(t_program *data, t_philo *philo)
 				return (1);
 			}
 		}
-		pthread_mutex_unlock(&philo->meal_lock);
+		else
+			pthread_mutex_unlock(&philo->meal_lock);
 	}
 	return (0);
 }
