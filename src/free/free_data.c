@@ -47,7 +47,7 @@ void	ft_free_data(t_program *data)
 {
 	if (data->err)
 	{
-		if (data->err == WRONG_ARGS || data->err == NB_PHILOS)
+		if (data->err == WRONG_ARGS)
 			return ;
 		ft_sys_err(data->err);
 	}

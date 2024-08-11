@@ -129,9 +129,8 @@ enum	e_errors
 	FEW_ARGS	= 0,
 	MANY_ARGS	= 1,
 	WRONG_ARGS	= 2,
-	NB_PHILOS	= 3,
-	THREAD_ERR	= 4,
-	MUTEX_ERR	= 5,
+	THREAD_ERR	= 3,
+	MUTEX_ERR	= 4,
 };
 
 int			ft_args_err(int err);

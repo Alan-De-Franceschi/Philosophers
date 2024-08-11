@@ -33,12 +33,7 @@ int	ft_format_err(t_program *data, int index, char **argv, int err)
 	if (err == WRONG_ARGS)
 	{
 		data->err = WRONG_ARGS;
-		ft_putstr_fd(": non null numeric argument required", 2);
-	}
-	else if (err == NB_PHILOS)
-	{
-		data->err = NB_PHILOS;
-		ft_putstr_fd(": nb philo must be numeric argument greater than 1", 2);
+		ft_putstr_fd(": positive numeric argument required", 2);
 	}
 	return (EXIT_FAILURE);
 }
