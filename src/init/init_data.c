@@ -79,6 +79,14 @@ static int	ft_init_mutex(t_program *data)
 		data->err = MUTEX_ERR;
 		return (EXIT_FAILURE);
 	}
+	data->err = pthread_mutex_init(&data->create_lock, NULL);
+	if (data->err)
+	{
+		pthread_mutex_destroy(&data->end_lock);
+		pthread_mutex_destroy(&data->write_lock);
+		data->err = MUTEX_ERR;
+		return (EXIT_FAILURE);
+	}
 	return (EXIT_SUCCESS);
 }
 
@@ -91,6 +99,8 @@ int	ft_init_data(t_program *data, char **argv)
 	data->end_flag = 0;
 	data->err = 0;
 	data->nb_fork = 0;
+	data->go = 0;
+	data->start_time = 0;
 	data->philos = NULL;
 	data->fork_lock = NULL;
 	if (ft_init_mutex(data) == EXIT_FAILURE)

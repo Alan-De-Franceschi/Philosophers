@@ -49,13 +49,16 @@ typedef struct s_philo
 	int				nb_eat;
 	int				meals_eaten;
 	int				finished;
+	int				*go;
 	long int		start_time;
+	long int		*prog_start_time;
 	long int		eat_time;
 	int				*end;
 	pthread_mutex_t	meal_lock;
 	pthread_mutex_t	time_lock;
 	pthread_mutex_t	*r_fork;
 	pthread_mutex_t	*l_fork;
+	pthread_mutex_t	*create_lock;
 	pthread_mutex_t	*write_lock;
 	pthread_mutex_t	*end_lock;
 }	t_philo;
@@ -72,10 +75,13 @@ typedef struct s_program
 	int				finished_philo;
 	int				end_flag;
 	int				err;
+	int				go;
+	long int		start_time;
 	pthread_mutex_t	*fork_lock;
 	int				nb_fork;
 	pthread_mutex_t	end_lock;
 	pthread_mutex_t	write_lock;
+	pthread_mutex_t	create_lock;
 	t_philo			*philos;
 }	t_program;
 
@@ -90,8 +96,11 @@ t_philo		*ft_init_philos(t_program *data);
 /*                            Philo routine                                 */
 /****************************************************************************/
 
-int			ft_philo(t_program *data);
+void		ft_philo(t_program *data);
+void		ft_thread_creation_err(t_program *data);
 void		ft_join_philos(t_program *data);
+void    	*ft_one_philo(t_philo *philo);
+int 		ft_global_routine(t_philo *philo);
 int			ft_eat(t_philo *philo);
 int			ft_even_philo_eat(t_philo *philo);
 int			ft_odd_philo_eat(t_philo *philo);
@@ -100,6 +109,7 @@ int			ft_sleep(t_philo *philo);
 int			ft_sleep_wait(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_think_wait(t_philo *philo);
+void    	ft_wait_philos_start(t_program *data);
 int			ft_check_end(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);
 int			ft_end(t_program *data, t_philo *philo);
@@ -108,7 +118,7 @@ int			ft_end(t_program *data, t_philo *philo);
 /*                            Time functions                                */
 /****************************************************************************/
 
-int			ft_init_start_time(t_philo *philo);
+int			ft_init_start_time(t_program *data);
 long int	ft_get_time(void);
 long int	ft_print_time(t_philo *philo);
 

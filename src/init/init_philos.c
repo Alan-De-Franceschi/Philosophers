@@ -36,6 +36,7 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].tsleep = data->tsleep;
 		philos[i].nb_philo = data->nb_philo;
 		philos[i].nb_eat = data->nb_eat;
+		philos[i].create_lock = &data->create_lock;
 		philos[i].write_lock = &data->write_lock;
 		philos[i].end_lock = &data->end_lock;
 		philos[i].tid = 0;
@@ -45,7 +46,9 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].finished = 0;
 		philos[i].start_time = 0;
 		philos[i].eat_time = 0;
+		philos[i].go = &data->go;
 		philos[i].end = &data->end_flag;
+		philos[i].prog_start_time = &data->start_time;
 		++i;
 	}
 	return ;
@@ -56,6 +59,7 @@ static int	ft_mutex_err(t_program *data, t_philo *philos, int nb_mlock,
 {
 	pthread_mutex_destroy(&data->end_lock);
 	pthread_mutex_destroy(&data->write_lock);
+	pthread_mutex_destroy(&data->create_lock);
 	ft_destroy_mlock(philos, nb_mlock);
 	ft_destroy_tlock(philos, nb_tlock);
 	data->err = MUTEX_ERR;

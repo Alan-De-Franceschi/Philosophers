@@ -32,5 +32,6 @@ int	main(int argc, char **argv)
 	ft_philo(&data);
 	pthread_mutex_destroy(&data.end_lock);
 	pthread_mutex_destroy(&data.write_lock);
+	pthread_mutex_destroy(&data.create_lock);
 	return (ft_free_data(&data), EXIT_SUCCESS);
 }

@@ -12,12 +12,12 @@
 
 #include "philo.h"
 
-int	ft_init_start_time(t_philo *philo)
+int	ft_init_start_time(t_program *data)
 {
 	struct timeval	tv;
 
 	gettimeofday(&tv, NULL);
-	philo->start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
+	data->start_time = (tv.tv_sec * 1000) + (tv.tv_usec / 1000);
 	return (EXIT_SUCCESS);
 }
 

@@ -22,7 +22,7 @@ static int	ft_rfork(t_philo *philo)
 		pthread_mutex_unlock(philo->r_fork);
 		return (1);
 	}
-	printf(YELLOW "%ld " END "%d " BLUE "has taken left fork\n" END,
+	printf(YELLOW "%ld " END "%d " BLUE "has taken right fork\n" END,
 		ft_print_time(philo), philo->id);
 	pthread_mutex_unlock(philo->write_lock);
 	return (0);
@@ -39,7 +39,7 @@ static int	ft_lfork(t_philo *philo)
 		pthread_mutex_unlock(philo->r_fork);
 		return (1);
 	}
-	printf(YELLOW "%ld " END "%d " BLUE "has taken right fork\n" END,
+	printf(YELLOW "%ld " END "%d " BLUE "has taken left fork\n" END,
 		ft_print_time(philo), philo->id);
 	printf(YELLOW "%ld " END "%d " BLUE "is eating\n" END,
 		ft_print_time(philo), philo->id);

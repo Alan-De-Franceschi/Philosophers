@@ -35,17 +35,21 @@ SOURCES_MAIN	= 	main.c \
 SOURCES_INIT 	=	init/init_data.c \
 					init/init_philos.c \
 
-SOURCES_PHILO	=	philo_routine/philo_main.c \
-					philo_routine/join_philos.c \
-					philo_routine/eat_routine/eat.c \
-					philo_routine/eat_routine/even_philo.c \
-					philo_routine/eat_routine/odd_philo.c \
-					philo_routine/sleep.c \
-					philo_routine/think.c \
-					philo_routine/wait.c \
-					philo_routine/check_end.c \
-					philo_routine/death.c \
-					philo_routine/end.c \
+SOURCES_PHILO	=	routines/philo_main.c \
+					routines/creation_routine/thread_creation_err.c \
+					routines/creation_routine/join_philos.c \
+					routines/philo_routine/one_philo.c \
+					routines/philo_routine/global_routine.c \
+					routines/philo_routine/eat_routine/eat.c \
+					routines/philo_routine/eat_routine/even_philo.c \
+					routines/philo_routine/eat_routine/odd_philo.c \
+					routines/philo_routine/sleep.c \
+					routines/philo_routine/think.c \
+					routines/philo_routine/wait.c \
+					routines/checker_routine/wait_philos_start.c \
+					routines/checker_routine/check_end.c \
+					routines/checker_routine/death.c \
+					routines/checker_routine/end.c \
 
 SOURCES_TIME	=	time_func/time_func.c \
 
