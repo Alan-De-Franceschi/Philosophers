@@ -44,5 +44,4 @@ void	ft_sys_err(int err)
 		ft_putstr_fd(RED "thread create : error\n" END, 2);
 	if (err == MUTEX_ERR)
 		ft_putstr_fd(RED "mutex init : error\n" END, 2);
-	return ;
 }

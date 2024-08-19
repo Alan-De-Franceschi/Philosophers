@@ -22,7 +22,6 @@ void	ft_destroy_mlock(t_philo *philos, int nb_mlock)
 		pthread_mutex_destroy(&philos[i].meal_lock);
 		++i;
 	}
-	return ;
 }
 
 void	ft_destroy_tlock(t_philo *philos, int nb_tlock)
@@ -35,5 +34,4 @@ void	ft_destroy_tlock(t_philo *philos, int nb_tlock)
 		pthread_mutex_destroy(&philos[i].time_lock);
 		++i;
 	}
-	return ;
 }

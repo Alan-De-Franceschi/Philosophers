@@ -99,8 +99,8 @@ t_philo		*ft_init_philos(t_program *data);
 void		ft_philo(t_program *data);
 void		ft_thread_creation_err(t_program *data);
 void		ft_join_philos(t_program *data);
-void    	*ft_one_philo(t_philo *philo);
-int 		ft_global_routine(t_philo *philo);
+void		*ft_one_philo(t_philo *philo);
+int			ft_global_routine(t_philo *philo);
 int			ft_eat(t_philo *philo);
 int			ft_even_philo_eat(t_philo *philo);
 int			ft_odd_philo_eat(t_philo *philo);
@@ -109,7 +109,7 @@ int			ft_sleep(t_philo *philo);
 int			ft_sleep_wait(t_philo *philo);
 int			ft_think(t_philo *philo);
 int			ft_think_wait(t_philo *philo);
-void    	ft_wait_philos_start(t_program *data);
+void		ft_wait_philos_start(t_program *data);
 int			ft_check_end(t_philo *philo);
 int			ft_death(t_program *data, t_philo *philo);
 int			ft_end(t_program *data, t_philo *philo);
@@ -136,11 +136,11 @@ void		ft_destroy_tlock(t_philo *philos, int nb_tlock);
 
 enum	e_errors
 {
-	FEW_ARGS	= 0,
-	MANY_ARGS	= 1,
-	WRONG_ARGS	= 2,
-	THREAD_ERR	= 3,
-	MUTEX_ERR	= 4,
+	FEW_ARGS	= 1,
+	MANY_ARGS	= 2,
+	WRONG_ARGS	= 3,
+	THREAD_ERR	= 4,
+	MUTEX_ERR	= 5,
 };
 
 int			ft_args_err(int err);

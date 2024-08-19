@@ -23,7 +23,6 @@ static void	ft_free_forks(pthread_mutex_t	*fork_lock, int nb_fork)
 		++i;
 	}
 	free(fork_lock);
-	return ;
 }
 
 static void	ft_free_philos(t_philo *philos, int nb_thread, int nb_philo)
@@ -40,7 +39,6 @@ static void	ft_free_philos(t_philo *philos, int nb_thread, int nb_philo)
 		++i;
 	}
 	free(philos);
-	return ;
 }
 
 void	ft_free_data(t_program *data)
@@ -48,10 +46,13 @@ void	ft_free_data(t_program *data)
 	if (data->err)
 	{
 		if (data->err == WRONG_ARGS)
+		{
+			data->err = 1;
 			return ;
+		}
 		ft_sys_err(data->err);
+		data->err = 1;
 	}
 	ft_free_forks(data->fork_lock, data->nb_fork);
 	ft_free_philos(data->philos, data->nb_thread, data->nb_philo);
-	return ;
 }

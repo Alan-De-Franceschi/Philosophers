@@ -19,10 +19,10 @@ int	ft_eat_wait(t_philo *philo)
 	count = 0;
 	while (count < philo->teat)
 	{
-		usleep(10 * 1000);
+		usleep(100 * 1000);
 		if (ft_check_end(philo) == 1)
 			return (1);
-		count += 10;
+		count += 100;
 	}
 	return (0);
 }
@@ -34,10 +34,10 @@ int	ft_sleep_wait(t_philo *philo)
 	count = 0;
 	while (count < philo->tsleep)
 	{
-		usleep(10 * 1000);
+		usleep(100 * 1000);
 		if (ft_check_end(philo) == 1)
 			return (1);
-		count += 10;
+		count += 100;
 	}
 	return (0);
 }
@@ -54,10 +54,10 @@ int	ft_think_wait(t_philo *philo)
 		time = philo->teat;
 	while (count < time)
 	{
-		usleep(10 * 1000);
+		usleep(100 * 1000);
 		if (ft_check_end(philo) == 1)
 			return (1);
-		count += 10;
+		count += 100;
 	}
 	return (0);
 }

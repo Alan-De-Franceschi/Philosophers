@@ -25,5 +25,4 @@ void	ft_join_philos(t_program *data)
 			pthread_join(data->philos[i].tid, NULL);
 		++i;
 	}
-	return ;
 }

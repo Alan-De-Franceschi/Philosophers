@@ -20,7 +20,6 @@ static void	ft_assign_forks(t_program *data, t_philo *philo, int nb_philos,
 		philo->r_fork = &data->fork_lock[nb_philos - 1];
 	else
 		philo->r_fork = &data->fork_lock[index - 1];
-	return ;
 }
 
 static void	ft_fill_philos(t_philo *philos, t_program *data)
@@ -48,10 +47,8 @@ static void	ft_fill_philos(t_philo *philos, t_program *data)
 		philos[i].eat_time = 0;
 		philos[i].go = &data->go;
 		philos[i].end = &data->end_flag;
-		philos[i].prog_start_time = &data->start_time;
-		++i;
+		philos[i++].prog_start_time = &data->start_time;
 	}
-	return ;
 }
 
 static int	ft_mutex_err(t_program *data, t_philo *philos, int nb_mlock,
